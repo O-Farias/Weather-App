@@ -199,6 +199,48 @@ button:focus {
   font-size: 2rem;
 }
 
+.footer {
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+.footer a {
+  color: #00aaff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.social-icons {
+  margin-top: 10px;
+}
+
+.social-icons a {
+  color: white;
+  margin: 0 10px;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #00aaff;
+}
+
+.footer p svg {
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
 .chart-container {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 20px;

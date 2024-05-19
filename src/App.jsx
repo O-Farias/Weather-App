@@ -1,4 +1,4 @@
-import React, { useState, useRef, Suspense } from "react";
+import React, { useState, useRef } from "react";
 import { useSpring, animated } from "react-spring";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,9 +25,57 @@ import {
   WiNightCloudy,
   WiNightRain,
 } from "react-icons/wi";
+import {
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+  FaHeart,
+} from "react-icons/fa";
+import { FiCoffee } from "react-icons/fi";
+import { SiReact } from "react-icons/si";
 import "./index.css";
 
-const ErrorMessage = ({ message }) => <p style={{ color: "red" }}>{message}</p>;
+const Footer = () => {
+  return (
+    <footer className="footer">
+      <p>
+        Made with <FiCoffee />
+        <SiReact />- by{" "}
+        <a
+          href="https://github.com/O-Farias"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Mateus Farias
+        </a>
+      </p>
+      <div className="social-icons">
+        <a
+          href="https://github.com/O-Farias"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaGithub />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/mateus-farias-b6ab77247/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaLinkedin />
+        </a>
+        <a
+          href="https://www.instagram.com/seu-usuario"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaInstagram />
+        </a>
+      </div>
+    </footer>
+  );
+};
 
 const App = () => {
   const [weather, setWeather] = useState(null);
@@ -45,13 +93,16 @@ const App = () => {
         setForecast(forecastData);
         setError(null);
       } else {
-        throw new Error("City not found");
+        setWeather(null);
+        setForecast(null);
+        setError("City not found");
+        toast.error("City not found");
       }
     } catch (error) {
       setWeather(null);
       setForecast(null);
-      setError(error.message);
-      toast.error(error.message);
+      setError("Error fetching weather data");
+      toast.error("Error fetching weather data");
     }
   };
 
@@ -73,13 +124,16 @@ const App = () => {
               setForecast(forecastData);
               setError(null);
             } else {
-              throw new Error("Location not found");
+              setWeather(null);
+              setForecast(null);
+              setError("Location not found");
+              toast.error("Location not found");
             }
           } catch (error) {
             setWeather(null);
             setForecast(null);
-            setError(error.message);
-            toast.error(error.message);
+            setError("Error fetching weather data");
+            toast.error("Error fetching weather data");
           }
         },
         (error) => {
@@ -148,7 +202,7 @@ const App = () => {
           {showForecast ? "Hide 5-Day Forecast" : "Show 5-Day Forecast"}
         </button>
       </div>
-      {error && <ErrorMessage message={error} />}
+      {error && <p>{error}</p>}
       {weather && (
         <>
           <WeatherCard weather={weather} />
@@ -161,7 +215,7 @@ const App = () => {
         className="forecast"
       >
         {showForecast && forecast && (
-          <Suspense fallback={<div>Loading...</div>}>
+          <>
             <h3>5-Day Forecast</h3>
             <WeatherChart forecast={forecast} />
             <div className="forecast-cards">
@@ -177,9 +231,10 @@ const App = () => {
                 </div>
               ))}
             </div>
-          </Suspense>
+          </>
         )}
       </animated.div>
+      <Footer />
     </div>
   );
 };
