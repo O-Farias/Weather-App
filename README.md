@@ -102,3 +102,11 @@ As animações de gradiente foram implementadas utilizando a biblioteca react-sp
 ## Notificações
 
 O aplicativo usa react-toastify para exibir notificações de erro ao usuário.
+
+## Deploy
+
+A aplicação está implantada no GitHub Pages e pode ser acessada [aqui.](https://o-farias.github.io/Weather-App/)
+
+## Contribuições
+
+Contribuições são bem-vindas! Se você tiver sugestões ou melhorias, sinta-se à vontade para abrir uma issue ou enviar um pull request.
