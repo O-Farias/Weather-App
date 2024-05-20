@@ -57,7 +57,7 @@ const Footer = () => {
           <FaLinkedin />
         </a>
         <a
-          href="https://www.instagram.com/seu-usuario"
+          href="https://www.instagram.com/_fariasm/"
           target="_blank"
           rel="noopener noreferrer"
         >
