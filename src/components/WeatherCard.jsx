@@ -1,35 +1,67 @@
 import React from "react";
-import {
-  WiDaySunny,
-  WiCloud,
-  WiRain,
-  WiSnow,
-  WiThunderstorm,
-  WiFog,
-  WiDayCloudy,
-  WiDayRain,
-  WiNightClear,
-  WiNightCloudy,
-  WiNightRain,
-} from "react-icons/wi";
+
+// Importar ícones personalizados
+import clearDayIcon from "../assets/icons/clear-day.png";
+import clearNightIcon from "../assets/icons/clear-night.png";
+import cloudyDayIcon from "../assets/icons/cloudy-day.png";
+import cloudyNightIcon from "../assets/icons/cloudy-night.png";
+import rainDayIcon from "../assets/icons/rain-day.png";
+import rainNightIcon from "../assets/icons/rain-night.png";
+import snowIcon from "../assets/icons/snow.png";
+import thunderstormIcon from "../assets/icons/thunderstorm.png";
+import fogIcon from "../assets/icons/fog.png";
 
 const getWeatherIcon = (description, isDaytime) => {
   description = description.toLowerCase();
 
   if (description.includes("clear")) {
-    return isDaytime ? <WiDaySunny /> : <WiNightClear />;
+    return isDaytime ? (
+      <img src={clearDayIcon} alt="Clear Sky" className="weather-icon-img" />
+    ) : (
+      <img
+        src={clearNightIcon}
+        alt="Clear Sky Night"
+        className="weather-icon-img"
+      />
+    );
   } else if (description.includes("cloud")) {
-    return isDaytime ? <WiDayCloudy /> : <WiNightCloudy />;
+    return isDaytime ? (
+      <img src={cloudyDayIcon} alt="Cloudy" className="weather-icon-img" />
+    ) : (
+      <img
+        src={cloudyNightIcon}
+        alt="Cloudy Night"
+        className="weather-icon-img"
+      />
+    );
   } else if (description.includes("rain") || description.includes("drizzle")) {
-    return isDaytime ? <WiDayRain /> : <WiNightRain />;
+    return isDaytime ? (
+      <img src={rainDayIcon} alt="Rain" className="weather-icon-img" />
+    ) : (
+      <img src={rainNightIcon} alt="Rain Night" className="weather-icon-img" />
+    );
   } else if (description.includes("thunderstorm")) {
-    return <WiThunderstorm />;
+    return (
+      <img
+        src={thunderstormIcon}
+        alt="Thunderstorm"
+        className="weather-icon-img"
+      />
+    );
   } else if (description.includes("snow")) {
-    return <WiSnow />;
+    return <img src={snowIcon} alt="Snow" className="weather-icon-img" />;
   } else if (description.includes("mist") || description.includes("fog")) {
-    return <WiFog />;
+    return <img src={fogIcon} alt="Fog" className="weather-icon-img" />;
   } else {
-    return isDaytime ? <WiDaySunny /> : <WiNightClear />;
+    return isDaytime ? (
+      <img src={clearDayIcon} alt="Clear Sky" className="weather-icon-img" />
+    ) : (
+      <img
+        src={clearNightIcon}
+        alt="Clear Sky Night"
+        className="weather-icon-img"
+      />
+    );
   }
 };
 

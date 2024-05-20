@@ -12,36 +12,27 @@ import {
   fetchForecast,
   fetchWeatherByCoordinates,
 } from "./services/weatherService";
-import {
-  WiDaySunny,
-  WiCloud,
-  WiRain,
-  WiSnow,
-  WiThunderstorm,
-  WiFog,
-  WiDayCloudy,
-  WiDayRain,
-  WiNightClear,
-  WiNightCloudy,
-  WiNightRain,
-} from "react-icons/wi";
-import {
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
-  FaTwitter,
-  FaHeart,
-} from "react-icons/fa";
+import { FaGithub, FaInstagram, FaLinkedin, FaHeart } from "react-icons/fa";
 import { FiCoffee } from "react-icons/fi";
 import { SiReact } from "react-icons/si";
 import "./index.css";
+
+// Importar ícones personalizados
+import clearDayIcon from "./assets/icons/clear-day.png";
+import clearNightIcon from "./assets/icons/clear-night.png";
+import cloudyDayIcon from "./assets/icons/cloudy-day.png";
+import cloudyNightIcon from "./assets/icons/cloudy-night.png";
+import rainDayIcon from "./assets/icons/rain-day.png";
+import rainNightIcon from "./assets/icons/rain-night.png";
+import snowIcon from "./assets/icons/snow.png";
+import thunderstormIcon from "./assets/icons/thunderstorm.png";
+import fogIcon from "./assets/icons/fog.png";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <p>
-        Made with <FiCoffee />
-        <SiReact />- by{" "}
+        Made with <FiCoffee /> <SiReact /> - by{" "}
         <a
           href="https://github.com/O-Farias"
           target="_blank"
@@ -160,22 +151,38 @@ const App = () => {
     description = description.toLowerCase();
 
     if (description.includes("clear")) {
-      return isDaytime ? <WiDaySunny /> : <WiNightClear />;
+      return isDaytime ? (
+        <img src={clearDayIcon} alt="Clear Sky" />
+      ) : (
+        <img src={clearNightIcon} alt="Clear Sky Night" />
+      );
     } else if (description.includes("cloud")) {
-      return isDaytime ? <WiDayCloudy /> : <WiNightCloudy />;
+      return isDaytime ? (
+        <img src={cloudyDayIcon} alt="Cloudy" />
+      ) : (
+        <img src={cloudyNightIcon} alt="Cloudy Night" />
+      );
     } else if (
       description.includes("rain") ||
       description.includes("drizzle")
     ) {
-      return isDaytime ? <WiDayRain /> : <WiNightRain />;
+      return isDaytime ? (
+        <img src={rainDayIcon} alt="Rain" />
+      ) : (
+        <img src={rainNightIcon} alt="Rain Night" />
+      );
     } else if (description.includes("thunderstorm")) {
-      return <WiThunderstorm />;
+      return <img src={thunderstormIcon} alt="Thunderstorm" />;
     } else if (description.includes("snow")) {
-      return <WiSnow />;
+      return <img src={snowIcon} alt="Snow" />;
     } else if (description.includes("mist") || description.includes("fog")) {
-      return <WiFog />;
+      return <img src={fogIcon} alt="Fog" />;
     } else {
-      return isDaytime ? <WiDaySunny /> : <WiNightClear />;
+      return isDaytime ? (
+        <img src={clearDayIcon} alt="Clear Sky" />
+      ) : (
+        <img src={clearNightIcon} alt="Clear Sky Night" />
+      );
     }
   };
 
@@ -191,7 +198,8 @@ const App = () => {
     <div className="content">
       <ToastContainer />
       <h1>
-        <WiCloud /> Weather App <WiDaySunny />
+        <img src={cloudyDayIcon} alt="Cloud" className="title-icon" /> Weather
+        App <img src={clearDayIcon} alt="Sun" className="title-icon" />
       </h1>
       <SearchBar onSearch={handleSearch} />
       <div className="button-container">
