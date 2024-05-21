@@ -1,0 +1,33 @@
+.weather-card {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  text-align: center;
+  width: 300px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.weather-icon {
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+
+.weather-icon-img {
+  width: 50px;
+  height: 50px;
+}

@@ -16,8 +16,6 @@ import { FaGithub, FaInstagram, FaLinkedin, FaHeart } from "react-icons/fa";
 import { FiCoffee } from "react-icons/fi";
 import { SiReact } from "react-icons/si";
 import "./index.css";
-
-// Importar ícones personalizados
 import clearDayIcon from "./assets/icons/clear-day.png";
 import clearNightIcon from "./assets/icons/clear-night.png";
 import cloudyDayIcon from "./assets/icons/cloudy-day.png";
@@ -28,44 +26,103 @@ import snowIcon from "./assets/icons/snow.png";
 import thunderstormIcon from "./assets/icons/thunderstorm.png";
 import fogIcon from "./assets/icons/fog.png";
 
-const Footer = () => {
-  return (
-    <footer className="footer">
-      <p>
-        Made with <FiCoffee /> <SiReact /> - by{" "}
-        <a
-          href="https://github.com/O-Farias"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Mateus Farias
-        </a>
-      </p>
-      <div className="social-icons">
-        <a
-          href="https://github.com/O-Farias"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaGithub />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/mateus-farias-b6ab77247/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaLinkedin />
-        </a>
-        <a
-          href="https://www.instagram.com/_fariasm/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaInstagram />
-        </a>
-      </div>
-    </footer>
-  );
+const Footer = () => (
+  <footer className="footer">
+    <p>
+      Made with <FiCoffee /> <SiReact /> - by{" "}
+      <a
+        href="https://github.com/O-Farias"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Mateus Farias
+      </a>
+    </p>
+    <div className="social-icons">
+      <a
+        href="https://github.com/O-Farias"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaGithub />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/mateus-farias-b6ab77247/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaLinkedin />
+      </a>
+      <a
+        href="https://www.instagram.com/_fariasm/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaInstagram />
+      </a>
+    </div>
+  </footer>
+);
+
+// Função para verificar se é dia ou noite
+const isDaytime = (timestamp, timezone) => {
+  const localTime = new Date((timestamp + timezone) * 1000);
+  const hours = localTime.getUTCHours();
+  return hours > 6 && hours < 18;
+};
+
+const getWeatherIcon = (description, isDaytime) => {
+  description = description.toLowerCase();
+
+  if (description.includes("clear")) {
+    return isDaytime ? (
+      <img src={clearDayIcon} alt="Clear Sky" className="weather-icon-img" />
+    ) : (
+      <img
+        src={clearNightIcon}
+        alt="Clear Sky Night"
+        className="weather-icon-img"
+      />
+    );
+  } else if (description.includes("cloud")) {
+    return isDaytime ? (
+      <img src={cloudyDayIcon} alt="Cloudy" className="weather-icon-img" />
+    ) : (
+      <img
+        src={cloudyNightIcon}
+        alt="Cloudy Night"
+        className="weather-icon-img"
+      />
+    );
+  } else if (description.includes("rain") || description.includes("drizzle")) {
+    return isDaytime ? (
+      <img src={rainDayIcon} alt="Rain" className="weather-icon-img" />
+    ) : (
+      <img src={rainNightIcon} alt="Rain Night" className="weather-icon-img" />
+    );
+  } else if (description.includes("thunderstorm")) {
+    return (
+      <img
+        src={thunderstormIcon}
+        alt="Thunderstorm"
+        className="weather-icon-img"
+      />
+    );
+  } else if (description.includes("snow")) {
+    return <img src={snowIcon} alt="Snow" className="weather-icon-img" />;
+  } else if (description.includes("mist") || description.includes("fog")) {
+    return <img src={fogIcon} alt="Fog" className="weather-icon-img" />;
+  } else {
+    return isDaytime ? (
+      <img src={clearDayIcon} alt="Clear Sky" className="weather-icon-img" />
+    ) : (
+      <img
+        src={clearNightIcon}
+        alt="Clear Sky Night"
+        className="weather-icon-img"
+      />
+    );
+  }
 };
 
 const App = () => {
@@ -147,47 +204,6 @@ const App = () => {
     }
   };
 
-  const getWeatherIcon = (description, isDaytime) => {
-    description = description.toLowerCase();
-
-    if (description.includes("clear")) {
-      return isDaytime ? (
-        <img src={clearDayIcon} alt="Clear Sky" />
-      ) : (
-        <img src={clearNightIcon} alt="Clear Sky Night" />
-      );
-    } else if (description.includes("cloud")) {
-      return isDaytime ? (
-        <img src={cloudyDayIcon} alt="Cloudy" />
-      ) : (
-        <img src={cloudyNightIcon} alt="Cloudy Night" />
-      );
-    } else if (
-      description.includes("rain") ||
-      description.includes("drizzle")
-    ) {
-      return isDaytime ? (
-        <img src={rainDayIcon} alt="Rain" />
-      ) : (
-        <img src={rainNightIcon} alt="Rain Night" />
-      );
-    } else if (description.includes("thunderstorm")) {
-      return <img src={thunderstormIcon} alt="Thunderstorm" />;
-    } else if (description.includes("snow")) {
-      return <img src={snowIcon} alt="Snow" />;
-    } else if (description.includes("mist") || description.includes("fog")) {
-      return <img src={fogIcon} alt="Fog" />;
-    } else {
-      return isDaytime ? (
-        <img src={clearDayIcon} alt="Clear Sky" />
-      ) : (
-        <img src={clearNightIcon} alt="Clear Sky Night" />
-      );
-    }
-  };
-
-  const isDaytime = new Date().getHours() > 6 && new Date().getHours() < 18;
-
   const forecastAnimation = useSpring({
     opacity: showForecast ? 1 : 0,
     transform: showForecast ? "translateY(0)" : "translateY(-20px)",
@@ -232,7 +248,10 @@ const App = () => {
                   <p>{new Date(item.dt * 1000).toLocaleDateString()}</p>
                   <p>{new Date(item.dt * 1000).toLocaleTimeString()}</p>
                   <div className="weather-icon">
-                    {getWeatherIcon(item.weather[0].description, isDaytime)}
+                    {getWeatherIcon(
+                      item.weather[0].description,
+                      isDaytime(item.dt, forecast.city.timezone)
+                    )}
                   </div>
                   <p>{item.weather[0].description}</p>
                   <p>Temp: {item.main.temp}°C</p>

@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import { FaSearch } from "react-icons/fa";
+import "./SearchBar.css";
 
 const SearchBar = ({ onSearch }) => {
-  const [city, setCity] = useState("");
+  const inputRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
-    const trimmedCity = city.trim();
-    if (trimmedCity) {
-      onSearch(trimmedCity);
-      setCity("");
+    if (inputRef.current) {
+      onSearch(inputRef.current.value);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="Enter city"
-      />
-      <button type="submit">Search</button>
+    <form className="search-form" onSubmit={handleSearch}>
+      <div className="search-bar">
+        <input
+          type="text"
+          ref={inputRef}
+          placeholder="Search for a city"
+          aria-label="Search for a city"
+        />
+        <button type="submit" className="search-button">
+          <FaSearch className="fa-search" />
+        </button>
+      </div>
     </form>
   );
 };
